@@ -3,15 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/store";
 
 const ApproximationResultVisualization = () => {
-  const results = useSelector(
-    (state: RootState) => state.approximation.results,
-  );
+  const result = useSelector((state: RootState) => state.approximation.result);
   return (
     <Card>
-      <Card.Header>Results</Card.Header>
-      <Card.Body>
-        {results ? <>&lt;Tabs&gt;</> : <p>No results yet</p>}
-      </Card.Body>
+      <Card.Header>Result</Card.Header>
+      <Card.Body>{result ? <>&lt;Tabs&gt;</> : <p>No result yet</p>}</Card.Body>
     </Card>
   );
 };

@@ -7,7 +7,7 @@ import { Point } from "src/modules/approximation/types";
 
 interface ApproximationState {
   points: Point[];
-  results: ApproximationResponse | null;
+  result: ApproximationResponse | null;
   method: ApproximationMethod;
 }
 
@@ -22,7 +22,7 @@ const initialState: ApproximationState = {
     { x: 7, y: 14 },
     { x: 8, y: 16 },
   ],
-  results: null,
+  result: null,
   method: ApproximationMethod.LINEAR,
 };
 
@@ -42,8 +42,8 @@ const approximationSlice = createSlice({
     addPoint(state, action: PayloadAction<Point>) {
       state.points.push(action.payload);
     },
-    setResults(state, action: PayloadAction<ApproximationResponse>) {
-      state.results = action.payload;
+    setResult(state, action: PayloadAction<ApproximationResponse>) {
+      state.result = action.payload;
     },
     setMethod(state, action: PayloadAction<ApproximationMethod>) {
       state.method = action.payload;
@@ -56,7 +56,7 @@ export const {
   setIthPoint,
   deleteIthPoint,
   addPoint,
-  setResults,
+  setResult,
   setMethod,
 } = approximationSlice.actions;
 export default approximationSlice.reducer;

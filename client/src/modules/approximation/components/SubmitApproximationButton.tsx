@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import LoadingButton from "src/modules/common/components/LoadingButton";
 import { RootState, useAppDispatch } from "src/store";
-import { setResults } from "src/store/approximation.reducer";
+import { setResult } from "src/store/approximation.reducer";
 import { useApproximateMutation } from "../api/api";
 
 const SubmitApproximationButton = () => {
@@ -20,7 +20,7 @@ const SubmitApproximationButton = () => {
     })
       .unwrap()
       .then((data) => {
-        dispatch(setResults(data));
+        dispatch(setResult(data));
       });
   }, [fetch, points, dispatch, method]);
 
