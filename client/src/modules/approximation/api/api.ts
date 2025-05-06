@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApproximationRequest, ApproximationResponse } from "./types";
+import { xsYsToPoints } from "./utils";
 
 export const approximationApi = createApi({
   reducerPath: "approximationApi",
@@ -13,6 +14,20 @@ export const approximationApi = createApi({
         method: "POST",
         body: data,
       }),
+      transformResponse: (
+        response: ApproximationResponse & {
+          xs: number[];
+          ys: number[];
+        },
+      ) => {
+        return {
+          data: response.data,
+          message: response.message,
+          method: response.method,
+          success: response.success,
+          points: xsYsToPoints(response.xs, response.ys),
+        } as ApproximationResponse;
+      },
     }),
   }),
 });

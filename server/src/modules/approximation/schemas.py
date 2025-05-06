@@ -18,6 +18,8 @@ class ApproximationRequest(BaseModel):
 
 
 class ApproximationResponse(BaseModel):
+    xs: List[float] = Field(min_length=8, max_length=12)
+    ys: List[float] = Field(min_length=8, max_length=12)
     method: ApproximationMethod
     success: bool
     message: str | None = None

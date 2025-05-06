@@ -20,6 +20,8 @@ class ApproximationService:
             raise Exception("Internal Server Error")
         validation_result = solver.validate()
         return ApproximationResponse(
+            xs=data.xs,
+            ys=data.ys,
             method=solver.approximation_type,
             success=validation_result.success,
             data=solver.solve() if validation_result.success else None,

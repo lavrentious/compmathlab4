@@ -1,3 +1,5 @@
+import { Point } from "../types";
+
 export enum ApproximationMethod {
   LINEAR = "LINEAR",
 }
@@ -14,6 +16,7 @@ export type ApproximationResult = {
 };
 
 export type ApproximationResponse = {
+  points: Point[];
   method: ApproximationMethod;
   success: boolean;
   message: string | null;
