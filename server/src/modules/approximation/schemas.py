@@ -8,22 +8,17 @@ from modules.approximation.core.types import ApproximationMethod, ApproximationR
 class ApproximationRequest(BaseModel):
     xs: List[float] = Field(min_length=8, max_length=12)
     ys: List[float] = Field(min_length=8, max_length=12)
+    method: ApproximationMethod
 
     @model_validator(mode="after")
     def length_match(self) -> "ApproximationRequest":
         if len(self.xs) != len(self.ys):
-            raise ValueError("Lenths of xs and ys must match")
+            raise ValueError("Lengths of xs and ys must match")
         return self
 
 
-class ApproximationResultEntry(BaseModel):
+class ApproximationResponse(BaseModel):
     method: ApproximationMethod
     success: bool
     message: str | None = None
     data: ApproximationResult | None = None
-
-
-class ApproximationResponse(
-    RootModel[Dict[ApproximationMethod, ApproximationResultEntry]]
-):
-    pass

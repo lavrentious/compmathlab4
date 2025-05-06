@@ -3,6 +3,7 @@ export enum ApproximationMethod {
 }
 
 export type ApproximationRequest = {
+  method: ApproximationMethod;
   xs: number[];
   ys: number[];
 };
@@ -12,14 +13,9 @@ export type ApproximationResult = {
   parameters: Record<string, number>;
 };
 
-export type ApproximationResultEntry = {
+export type ApproximationResponse = {
   method: ApproximationMethod;
   success: boolean;
   message: string | null;
   data: ApproximationResult | null;
 };
-
-export type ApproximationResponse = Record<
-  ApproximationMethod,
-  ApproximationResultEntry
->;

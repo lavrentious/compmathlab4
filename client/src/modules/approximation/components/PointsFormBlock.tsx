@@ -33,7 +33,7 @@ const PointsFormBlock = () => {
   );
 
   return (
-    <Card>
+    <Card className="mb-3">
       <Card.Header>Points</Card.Header>
       <Card.Body>
         {points.length > 0 ? (
