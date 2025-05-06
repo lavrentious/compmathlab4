@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ApproximationResultEntry } from "src/modules/approximation/api/types";
+import { ApproximationResponse } from "src/modules/approximation/api/types";
 import { Point } from "src/modules/approximation/types";
 
 interface ApproximationState {
   points: Point[];
-  results: ApproximationResultEntry[] | null;
+  results: ApproximationResponse | null;
 }
 
 const initialState: ApproximationState = {
@@ -37,7 +37,7 @@ const approximationSlice = createSlice({
     addPoint(state, action: PayloadAction<Point>) {
       state.points.push(action.payload);
     },
-    setResults(state, action: PayloadAction<ApproximationResultEntry[]>) {
+    setResults(state, action: PayloadAction<ApproximationResponse>) {
       state.results = action.payload;
     },
   },

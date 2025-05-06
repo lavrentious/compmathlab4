@@ -19,6 +19,7 @@ export type ApproximationResultEntry = {
   data: ApproximationResult | null;
 };
 
-export type ApproximationResponse = {
-  results: ApproximationResultEntry[];
-};
+export type ApproximationResponse = Record<
+  ApproximationMethod,
+  ApproximationResultEntry
+>;

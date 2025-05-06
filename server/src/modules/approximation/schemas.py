@@ -1,6 +1,6 @@
-from typing import List
+from typing import Dict, List
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, RootModel, model_validator
 
 from modules.approximation.core.types import ApproximationMethod, ApproximationResult
 
@@ -23,5 +23,7 @@ class ApproximationResultEntry(BaseModel):
     data: ApproximationResult | None = None
 
 
-class ApproximationResponse(BaseModel):
-    results: List[ApproximationResultEntry]
+class ApproximationResponse(
+    RootModel[Dict[ApproximationMethod, ApproximationResultEntry]]
+):
+    pass

@@ -15,7 +15,7 @@ const SubmitApproximationButton = () => {
     fetch(pointsToRequest(points))
       .unwrap()
       .then((data) => {
-        dispatch(setResults(data.results));
+        dispatch(setResults(data));
       });
   }, [fetch, points, dispatch]);
 
