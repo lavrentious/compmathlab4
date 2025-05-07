@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import LoadingButton from "src/modules/common/components/LoadingButton";
 import { RootState, useAppDispatch } from "src/store";
@@ -24,9 +24,13 @@ const SubmitApproximationButton = () => {
       });
   }, [fetch, points, dispatch, method]);
 
+  const disabled = useMemo(() => {
+    if (points.length < 8) return true;
+  }, [points]);
+
   return (
     // TODO: disable button
-    <LoadingButton isLoading={isLoading} onClick={onSubmit}>
+    <LoadingButton isLoading={isLoading} onClick={onSubmit} disabled={disabled}>
       Run
     </LoadingButton>
   );
