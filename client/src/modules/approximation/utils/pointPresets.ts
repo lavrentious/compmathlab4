@@ -1,7 +1,7 @@
 import { ApproximationMethod } from "../api/types";
 import { Point } from "../types";
 
-export const pointPresets: Record<ApproximationMethod, Point[]> = {
+export const pointPresets: Record<string, Point[]> = {
   [ApproximationMethod.LINEAR]: [
     { x: "0", y: "0" },
     { x: "1", y: "2" },
