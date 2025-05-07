@@ -2,6 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import ApproximationParamsBlock from "../components/ApproximationParamsBlock";
 import ApproximationVisualizationBlock from "../components/ApproximationVisualizationBlock";
 
+import ImportModal from "../components/ImportModal";
 import PointsFormBlock from "../components/PointsFormBlock";
 import SubmitApproximationButton from "../components/SubmitApproximationButton";
 
@@ -15,6 +16,8 @@ const MainPage = () => {
           <ApproximationParamsBlock />
           <hr />
           <SubmitApproximationButton />
+
+          <ImportModal />
         </Col>
         <Col md={6} lg={8}>
           <ApproximationVisualizationBlock />

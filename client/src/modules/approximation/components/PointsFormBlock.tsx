@@ -5,9 +5,10 @@ import { RootState, useAppDispatch } from "src/store";
 import {
   addPoint as addPointAction,
   deleteIthPoint as deleteIthPointAction,
+  setImportModalShown,
   setIthPoint as setIthPointAction,
 } from "src/store/approximation.reducer";
-import { isStrictFloat } from "../utils";
+import { isStrictFloat } from "../utils/utils";
 
 const PointsFormBlock = () => {
   const dispatch = useAppDispatch();
@@ -93,9 +94,15 @@ const PointsFormBlock = () => {
           <div className="text-center">No points</div>
         )}
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="d-flex  justify-content-between">
         <Button onClick={addPoint} variant="success">
           +
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => dispatch(setImportModalShown(true))}
+        >
+          import
         </Button>
       </Card.Footer>
     </Card>

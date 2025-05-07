@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Badge, Table } from "react-bootstrap";
 import Plot from "react-plotly.js";
 import { ApproximationResponse } from "../api/types";
-import { fExprToFunction, generatePoints, pointsToXsYs } from "../utils";
+import { fExprToFunction, generatePoints, pointsToXsYs } from "../utils/utils";
 
 interface ApproximationVisualizationProps {
   result: ApproximationResponse;

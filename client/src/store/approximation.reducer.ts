@@ -9,30 +9,14 @@ interface ApproximationState {
   points: Point[];
   result: ApproximationResponse | null;
   method: ApproximationMethod;
+  importModalShown: boolean;
 }
 
 const initialState: ApproximationState = {
-  points: [
-    // { x: 1, y: 2 },
-    // { x: 2, y: 4 },
-    // { x: 3, y: 6 },
-    // { x: 4, y: 8 },
-    // { x: 5, y: 10 },
-    // { x: 6, y: 12 },
-    // { x: 7, y: 14 },
-    // { x: 8, y: 16 },
-    { x: -4, y: 16 },
-    { x: -3, y: 9 },
-    { x: -2, y: 4 },
-    { x: -1, y: 1 },
-    { x: 0, y: 0 },
-    { x: 1, y: 1 },
-    { x: 2, y: 4 },
-    { x: 3, y: 9 },
-    { x: 4, y: 16 },
-  ],
+  points: [],
   result: null,
   method: ApproximationMethod.LINEAR,
+  importModalShown: false,
 };
 
 const approximationSlice = createSlice({
@@ -57,6 +41,9 @@ const approximationSlice = createSlice({
     setMethod(state, action: PayloadAction<ApproximationMethod>) {
       state.method = action.payload;
     },
+    setImportModalShown(state, action: PayloadAction<boolean>) {
+      state.importModalShown = action.payload;
+    },
   },
 });
 
@@ -67,5 +54,6 @@ export const {
   addPoint,
   setResult,
   setMethod,
+  setImportModalShown,
 } = approximationSlice.actions;
 export default approximationSlice.reducer;
