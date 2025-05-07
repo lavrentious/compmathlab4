@@ -2,6 +2,7 @@ import { Point } from "../types";
 
 export enum ApproximationMethod {
   LINEAR = "LINEAR",
+  QUADRATIC = "QUADRATIC",
 }
 
 export type ApproximationRequest = {

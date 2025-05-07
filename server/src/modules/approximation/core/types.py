@@ -5,6 +5,7 @@ from typing import Dict
 
 class ApproximationMethod(Enum):
     LINEAR = "LINEAR"
+    QUADRATIC = "QUADRATIC"
 
 
 @dataclass

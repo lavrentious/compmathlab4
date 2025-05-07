@@ -1,6 +1,7 @@
 import { Point } from "./types";
 
 export function fExprToFunction(fExpr: string) {
+  fExpr = fExpr.replace("^", "**");
   return new Function("x", `return ${fExpr}`) as (x: number) => number;
 }
 
