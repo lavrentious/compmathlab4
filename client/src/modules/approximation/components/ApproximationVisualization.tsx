@@ -18,6 +18,7 @@ const ApproximationVisualization: React.FC<ApproximationVisualizationProps> = ({
   const { xs, ys } = useMemo(() => {
     if (!fn || !result.points) return { xs: [], ys: [] };
     const points = generatePoints(fn, result.points);
+    console.log("generated points", points);
     return points;
   }, [result, fn]);
   const { originalXs, originalYs } = useMemo(() => {
@@ -30,8 +31,8 @@ const ApproximationVisualization: React.FC<ApproximationVisualizationProps> = ({
       <Plot
         data={[
           {
-            x: xs,
-            y: ys,
+            x: xs.map((x) => +x),
+            y: ys.map((y) => +y),
             type: "scatter",
             mode: "lines",
             line: { color: "blue" },

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "src/store";
@@ -7,27 +7,49 @@ import {
   deleteIthPoint as deleteIthPointAction,
   setIthPoint as setIthPointAction,
 } from "src/store/approximation.reducer";
-import { Point } from "../types";
+import { isStrictFloat } from "../utils";
 
 const PointsFormBlock = () => {
   const dispatch = useAppDispatch();
   const points = useSelector((state: RootState) => state.approximation.points);
 
-  const setIthPoint = useCallback(
-    (index: number, point: Point) => {
-      dispatch(setIthPointAction({ index, point }));
-    },
-    [dispatch],
+  // Local string values to allow partial float input
+  const [localInputs, setLocalInputs] = useState<{ x: string; y: string }[]>(
+    [],
   );
+
+  // Sync localInputs with redux points when they change
+  useEffect(() => {
+    setLocalInputs(
+      points.map((p) => ({ x: p.x.toString(), y: p.y.toString() })),
+    );
+  }, [points]);
+
+  const updateLocal = (index: number, coord: "x" | "y", value: string) => {
+    setLocalInputs((prev) => {
+      const next = [...prev];
+      next[index] = { ...next[index], [coord]: value };
+      return next;
+    });
+  };
+
+  const handleBlur = (index: number) => {
+    const { x, y } = localInputs[index];
+    console.log("handling blur", { index, x, y });
+    console.log(parseFloat(x), parseFloat(y));
+    console.log(isStrictFloat(x), isStrictFloat(y));
+    const parsedX = isStrictFloat(x) ? x : "0";
+    const parsedY = isStrictFloat(y) ? y : "0";
+    dispatch(setIthPointAction({ index, point: { x: parsedX, y: parsedY } }));
+  };
+
+  const addPoint = useCallback(() => {
+    dispatch(addPointAction({ x: "0", y: "0" }));
+  }, [dispatch]);
+
   const deleteIthPoint = useCallback(
     (index: number) => {
       dispatch(deleteIthPointAction(index));
-    },
-    [dispatch],
-  );
-  const addPoint = useCallback(
-    (point: Point) => {
-      dispatch(addPointAction(point));
     },
     [dispatch],
   );
@@ -38,31 +60,31 @@ const PointsFormBlock = () => {
       <Card.Body>
         {points.length > 0 ? (
           <Form>
-            {points.map((point, index) => (
+            {points.map((_, index) => (
               <Form.Group key={index} className="d-flex">
                 <Form.Control
                   className="m-1"
-                  type="number"
-                  value={point.x}
-                  onChange={(e) =>
-                    setIthPoint(index, { ...point, x: +e.target.value })
-                  }
+                  type="text"
+                  inputMode="decimal"
+                  value={localInputs[index]?.x ?? ""}
+                  onChange={(e) => updateLocal(index, "x", e.target.value)}
+                  onBlur={() => handleBlur(index)}
                 />
                 <Form.Control
                   className="m-1"
-                  type="number"
-                  value={point.y}
-                  onChange={(e) =>
-                    setIthPoint(index, { ...point, y: +e.target.value })
-                  }
+                  type="text"
+                  inputMode="decimal"
+                  value={localInputs[index]?.y ?? ""}
+                  onChange={(e) => updateLocal(index, "y", e.target.value)}
+                  onBlur={() => handleBlur(index)}
                 />
                 <Button
                   className="m-1"
+                  variant="outline-danger"
                   tabIndex={-1}
                   onClick={() => deleteIthPoint(index)}
-                  variant="outline-danger"
                 >
-                  -
+                  &minus;
                 </Button>
               </Form.Group>
             ))}
@@ -72,7 +94,7 @@ const PointsFormBlock = () => {
         )}
       </Card.Body>
       <Card.Footer>
-        <Button onClick={() => addPoint({ x: 0, y: 0 })} variant="success">
+        <Button onClick={addPoint} variant="success">
           +
         </Button>
       </Card.Footer>

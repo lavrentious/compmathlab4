@@ -1,5 +1,6 @@
 from typing import Dict, List
 
+from config import FORMAT_STR
 from modules.approximation.core.solvers.linear import LinearSolver
 from modules.approximation.core.solvers.quadratic import QuadraticSolver
 from modules.approximation.core.solvers.solver import BaseSolver
@@ -23,8 +24,8 @@ class ApproximationService:
             raise Exception("Internal Server Error")
         validation_result = solver.validate()
         return ApproximationResponse(
-            xs=data.xs,
-            ys=data.ys,
+            xs=[FORMAT_STR.format(x) for x in data.xs],
+            ys=[FORMAT_STR.format(y) for y in data.ys],
             method=solver.approximation_type,
             success=validation_result.success,
             data=solver.solve() if validation_result.success else None,

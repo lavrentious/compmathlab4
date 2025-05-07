@@ -1,4 +1,4 @@
 export type Point = {
-  x: number;
-  y: number;
+  x: string; // float as string
+  y: string; // float as string
 };

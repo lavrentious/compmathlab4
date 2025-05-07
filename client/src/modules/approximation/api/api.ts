@@ -9,15 +9,18 @@ export const approximationApi = createApi({
   }),
   endpoints: (build) => ({
     approximate: build.mutation<ApproximationResponse, ApproximationRequest>({
-      query: (data) => ({
-        url: "/approximation",
-        method: "POST",
-        body: data,
-      }),
+      query: (data) => {
+        console.log("API", data);
+        return {
+          url: "/approximation",
+          method: "POST",
+          body: data,
+        };
+      },
       transformResponse: (
         response: ApproximationResponse & {
-          xs: number[];
-          ys: number[];
+          xs: string[];
+          ys: string[];
         },
       ) => {
         return {

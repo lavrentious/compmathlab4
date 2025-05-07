@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from decimal import Decimal
 from typing import List
 
 from modules.approximation.core.types import (
@@ -10,9 +11,13 @@ from modules.approximation.core.types import (
 
 class BaseSolver(ABC):
 
-    def __init__(self, x: List[float], y: List[float]):
-        self.xs = x
-        self.ys = y
+    def __init__(
+        self,
+        x: List[float | Decimal] | List[Decimal],
+        y: List[float | Decimal] | List[Decimal],
+    ):
+        self.xs = [Decimal(x) for x in x]
+        self.ys = [Decimal(y) for y in y]
         self.n = len(x)
 
         if len(x) != len(y):

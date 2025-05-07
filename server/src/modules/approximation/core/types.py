@@ -11,7 +11,7 @@ class ApproximationMethod(Enum):
 @dataclass
 class ApproximationResult:
     f_expr: str
-    parameters: Dict[str, float]
+    parameters: Dict[str, str]  # param: float as string
 
 
 @dataclass

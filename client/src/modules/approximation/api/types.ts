@@ -7,13 +7,13 @@ export enum ApproximationMethod {
 
 export type ApproximationRequest = {
   method: ApproximationMethod;
-  xs: number[];
-  ys: number[];
+  xs: string[];
+  ys: string[];
 };
 
 export type ApproximationResult = {
   f_expr: string;
-  parameters: Record<string, number>;
+  parameters: Record<string, string>; // string: float as string
 };
 
 export type ApproximationResponse = {
