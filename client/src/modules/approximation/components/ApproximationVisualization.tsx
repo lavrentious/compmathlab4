@@ -27,8 +27,11 @@ const ApproximationVisualization: React.FC<ApproximationVisualizationProps> = ({
   }, [result]);
 
   return (
-    <>
+    <div style={{ width: "100%", height: "100%" }}>
       <Plot
+        style={{ width: "100%", height: "100%" }}
+        useResizeHandler={true}
+        config={{ responsive: true }}
         data={[
           {
             x: xs.map((x) => +x),
@@ -51,6 +54,7 @@ const ApproximationVisualization: React.FC<ApproximationVisualizationProps> = ({
           title: { text: "Result" },
           xaxis: { title: { text: "x" } },
           yaxis: { title: { text: "ф(x)" } },
+          autosize: true,
         }}
       />
       <Table bordered striped>
@@ -99,7 +103,7 @@ const ApproximationVisualization: React.FC<ApproximationVisualizationProps> = ({
           </tr>
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 
