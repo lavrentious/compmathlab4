@@ -1,9 +1,8 @@
 from decimal import Decimal
-from typing import List
-from pydantic import BaseModel, Field, model_validator
-from modules.approximation.core.types import ApproximationMethod, ApproximationResult
 from typing import List, Union
+
 from pydantic import BaseModel, Field, field_validator, model_validator
+
 from modules.approximation.core.types import ApproximationMethod, ApproximationResult
 
 

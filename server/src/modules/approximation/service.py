@@ -1,14 +1,10 @@
-from typing import Dict, List
-
 from config import FORMAT_STR
 from modules.approximation.core.solvers.linear import LinearSolver
+from modules.approximation.core.solvers.power import PowerSolver
 from modules.approximation.core.solvers.quadratic import QuadraticSolver
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import ApproximationMethod
-from modules.approximation.schemas import (
-    ApproximationRequest,
-    ApproximationResponse,
-)
+from modules.approximation.schemas import ApproximationRequest, ApproximationResponse
 
 
 class ApproximationService:
@@ -19,6 +15,8 @@ class ApproximationService:
             solver = LinearSolver(data.xs, data.ys)
         elif data.method == ApproximationMethod.QUADRATIC:
             solver = QuadraticSolver(data.xs, data.ys)
+        elif data.method == ApproximationMethod.POWER:
+            solver = PowerSolver(data.xs, data.ys)
 
         if not solver:
             raise Exception("Internal Server Error")

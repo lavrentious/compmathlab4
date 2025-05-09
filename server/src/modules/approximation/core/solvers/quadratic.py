@@ -1,4 +1,5 @@
 import numpy as np
+
 from config import FORMAT_STR, PRECISION
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
