@@ -18,6 +18,7 @@ export type ApproximationData = {
   f_expr: string;
   parameters: Record<string, string>; // string: float as string
   determination_coefficient: string;
+  pearson_correlation_coefficient: string | null;
 };
 
 export type ApproximationResponse = {

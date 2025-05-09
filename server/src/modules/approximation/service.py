@@ -6,7 +6,10 @@ from modules.approximation.core.solvers.power import PowerSolver
 from modules.approximation.core.solvers.quadratic import QuadraticSolver
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import ApproximationMethod
-from modules.approximation.core.utils import compute_determination_coefficient
+from modules.approximation.core.utils import (
+    compute_determination_coefficient,
+    compute_pearson_correlation_coefficient,
+)
 from modules.approximation.schemas import (
     ApproximationData,
     ApproximationRequest,
@@ -36,10 +39,16 @@ class ApproximationService:
         if validation_result.success:
             res = solver.solve()
             r = compute_determination_coefficient(data.xs, data.ys, res.f)
+            pearson_coefficient = (
+                compute_pearson_correlation_coefficient(data.xs, data.ys)
+                if data.method == ApproximationMethod.LINEAR
+                else None
+            )
             solution_data = ApproximationData(
                 f_expr=res.f_expr,
                 parameters=res.parameters,
                 determination_coefficient=r,
+                pearson_correlation_coefficient=pearson_coefficient,
             )
 
         return ApproximationResponse(

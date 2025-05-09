@@ -32,6 +32,7 @@ class ApproximationData(BaseModel):
     f_expr: str
     parameters: Dict[str, Decimal]
     determination_coefficient: Decimal
+    pearson_correlation_coefficient: Decimal | None = None  # applicable for linear only
 
 
 class ApproximationResponse(BaseModel):

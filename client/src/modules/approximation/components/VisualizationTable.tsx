@@ -44,6 +44,12 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({ result }) => {
               <td>determination coefficient</td>
               <td>{result.data.determination_coefficient}</td>
             </tr>
+            {result.data.pearson_correlation_coefficient && (
+              <tr>
+                <td>pearson correlation coefficient</td>
+                <td>{result.data.pearson_correlation_coefficient}</td>
+              </tr>
+            )}
           </>
         )}
         <tr>
