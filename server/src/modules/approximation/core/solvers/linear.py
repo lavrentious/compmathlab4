@@ -1,5 +1,5 @@
 from decimal import Decimal
-from config import PRECISION
+from config import FORMAT_STR, PRECISION
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
     ApproximationMethod,
@@ -29,12 +29,11 @@ class LinearSolver(BaseSolver):
         a = d1 / d
         b = d2 / d
 
-        # Format to string with defined precision
-        format_str = f"{{:.{PRECISION}f}}"
-        a_str = format_str.format(a)
-        b_str = format_str.format(b)
+        f = lambda x: a * x + b
+        f_expr = f"{a} * x + {b}"
 
         return ApproximationResult(
-            f_expr=f"{a_str} * x + {b_str}",
+            f=f,
+            f_expr=f_expr,
             parameters={"a": a, "b": b},
         )

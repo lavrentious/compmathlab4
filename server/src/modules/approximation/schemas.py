@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import List, Union
+from typing import List, Union, Dict
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -28,10 +28,16 @@ class ApproximationRequest(BaseModel):
         return self
 
 
+class ApproximationData(BaseModel):
+    f_expr: str
+    parameters: Dict[str, Decimal]
+    determination_coefficient: Decimal
+
+
 class ApproximationResponse(BaseModel):
     xs: List[str] = Field(min_length=8, max_length=12)
     ys: List[str] = Field(min_length=8, max_length=12)
     method: ApproximationMethod
     success: bool
     message: str | None = None
-    data: ApproximationResult | None = None
+    data: ApproximationData | None = None

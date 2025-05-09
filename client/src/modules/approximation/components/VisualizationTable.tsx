@@ -40,6 +40,10 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({ result }) => {
               <td>function</td>
               <td>{result.data.f_expr}</td>
             </tr>
+            <tr>
+              <td>determination coefficient</td>
+              <td>{result.data.determination_coefficient}</td>
+            </tr>
           </>
         )}
         <tr>

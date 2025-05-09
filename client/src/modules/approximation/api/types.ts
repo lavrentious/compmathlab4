@@ -14,9 +14,10 @@ export type ApproximationRequest = {
   ys: string[];
 };
 
-export type ApproximationResult = {
+export type ApproximationData = {
   f_expr: string;
   parameters: Record<string, string>; // string: float as string
+  determination_coefficient: string;
 };
 
 export type ApproximationResponse = {
@@ -24,5 +25,5 @@ export type ApproximationResponse = {
   method: ApproximationMethod;
   success: boolean;
   message: string | null;
-  data: ApproximationResult | null;
+  data: ApproximationData | null;
 };

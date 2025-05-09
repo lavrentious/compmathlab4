@@ -6,7 +6,12 @@ from modules.approximation.core.solvers.power import PowerSolver
 from modules.approximation.core.solvers.quadratic import QuadraticSolver
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import ApproximationMethod
-from modules.approximation.schemas import ApproximationRequest, ApproximationResponse
+from modules.approximation.core.utils import compute_determination_coefficient
+from modules.approximation.schemas import (
+    ApproximationData,
+    ApproximationRequest,
+    ApproximationResponse,
+)
 
 
 class ApproximationService:
@@ -27,11 +32,21 @@ class ApproximationService:
         if not solver:
             raise Exception("Internal Server Error")
         validation_result = solver.validate()
+        solution_data: ApproximationData | None = None
+        if validation_result.success:
+            res = solver.solve()
+            r = compute_determination_coefficient(data.xs, data.ys, res.f)
+            solution_data = ApproximationData(
+                f_expr=res.f_expr,
+                parameters=res.parameters,
+                determination_coefficient=r,
+            )
+
         return ApproximationResponse(
             xs=[FORMAT_STR.format(x) for x in data.xs],
             ys=[FORMAT_STR.format(y) for y in data.ys],
             method=solver.approximation_type,
             success=validation_result.success,
-            data=solver.solve() if validation_result.success else None,
+            data=solution_data,
             message=validation_result.message,
         )

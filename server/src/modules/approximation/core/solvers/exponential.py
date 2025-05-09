@@ -33,9 +33,11 @@ class ExponentialSolver(BaseSolver):
         b = linear_approximation.parameters["a"]
 
         # f(x) = a * e^(bx)
-        f_expr = f"{FORMAT_STR.format(a)} * {FORMAT_STR.format(e)} ^ ({FORMAT_STR.format(b)} * x)"
+        f = lambda x: a * Decimal(e) ** (b * x)
+        f_expr = f"{a} * {e} ^ ({b} * x)"
 
         return ApproximationResult(
-            f_expr,
-            {"a": a, "b": b},
+            f=f,
+            f_expr=f_expr,
+            parameters={"a": a, "b": b},
         )

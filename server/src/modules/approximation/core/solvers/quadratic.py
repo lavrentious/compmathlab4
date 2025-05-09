@@ -1,5 +1,4 @@
 import numpy as np
-
 from config import FORMAT_STR, PRECISION
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
@@ -42,7 +41,11 @@ class QuadraticSolver(BaseSolver):
             "a2": a2,
         }
 
+        f = lambda x: a2 * x**2 + a1 * x + a0
+        f_expr = f"{parameters['a2']}*x^2 + {parameters['a1']}*x + {parameters['a0']}"
+
         return ApproximationResult(
-            f"{parameters['a2']}*x^2 + {parameters['a1']}*x + {parameters['a0']}",
-            parameters,
+            f=f,
+            f_expr=f_expr,
+            parameters=parameters,
         )

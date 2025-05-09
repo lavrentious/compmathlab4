@@ -32,9 +32,11 @@ class PowerSolver(BaseSolver):
         a = linear_approximation.parameters["b"].exp()
         b = linear_approximation.parameters["a"]
 
+        f = lambda x: a * x**b
         f_expr = f"{FORMAT_STR.format(a)} * x ^ {FORMAT_STR.format(b)}"
 
         return ApproximationResult(
-            f_expr,
-            {"a": a, "b": b},
+            f=f,
+            f_expr=f_expr,
+            parameters={"a": a, "b": b},
         )
