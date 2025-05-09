@@ -36,5 +36,5 @@ class PowerSolver(BaseSolver):
 
         return ApproximationResult(
             f_expr,
-            {"a": FORMAT_STR.format(a), "b": FORMAT_STR.format(b)},
+            {"a": a, "b": b},
         )

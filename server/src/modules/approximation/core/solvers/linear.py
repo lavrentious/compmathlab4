@@ -1,3 +1,4 @@
+from decimal import Decimal
 from config import PRECISION
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
@@ -21,9 +22,9 @@ class LinearSolver(BaseSolver):
         sy = sum(self.ys)
         sxy = sum(x * y for x, y in zip(self.xs, self.ys))
 
-        d = sxx * n - sx * sx
-        d1 = sxy * n - sx * sy
-        d2 = sxx * sy - sx * sxy
+        d = Decimal(sxx * n - sx * sx)
+        d1 = Decimal(sxy * n - sx * sy)
+        d2 = Decimal(sxx * sy - sx * sxy)
 
         a = d1 / d
         b = d2 / d
@@ -35,5 +36,5 @@ class LinearSolver(BaseSolver):
 
         return ApproximationResult(
             f_expr=f"{a_str} * x + {b_str}",
-            parameters={"a": a_str, "b": b_str},
+            parameters={"a": a, "b": b},
         )

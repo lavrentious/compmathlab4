@@ -37,9 +37,9 @@ class QuadraticSolver(BaseSolver):
         [a0, a1, a2] = solution
 
         parameters = {
-            "a0": FORMAT_STR.format(a0),
-            "a1": FORMAT_STR.format(a1),
-            "a2": FORMAT_STR.format(a2),
+            "a0": a0,
+            "a1": a1,
+            "a2": a2,
         }
 
         return ApproximationResult(
