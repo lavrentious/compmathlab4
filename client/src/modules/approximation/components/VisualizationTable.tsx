@@ -1,76 +1,102 @@
+import "katex/dist/katex.min.css";
 import React from "react";
 import { Badge, Table } from "react-bootstrap";
+import { BlockMath } from "react-katex";
 import { ApproximationResponse } from "../api/types";
 
 interface VisualizationTableProps {
   result: ApproximationResponse;
+  precision?: number;
 }
 
-const VisualizationTable: React.FC<VisualizationTableProps> = ({ result }) => {
+const formatNumber = (value: string, precision = 4): string => {
+  const num = parseFloat(value);
+  return isNaN(num) ? String(value) : num.toFixed(precision);
+};
+
+const VisualizationTable: React.FC<VisualizationTableProps> = ({
+  result,
+  precision = 16,
+}) => {
   return (
-    <Table bordered striped>
+    <Table bordered hover responsive className="mb-0">
       <tbody>
         <tr>
-          <td>status</td>
+          <th>Status</th>
           <td>
             {result.success ? (
-              <Badge bg="success">success</Badge>
+              <Badge bg="success">Success</Badge>
             ) : (
-              <Badge bg="danger">failed</Badge>
+              <Badge bg="danger">Failed</Badge>
             )}
           </td>
         </tr>
         <tr>
-          <td>used method</td>
+          <th>Used Method</th>
           <td>{result.method}</td>
         </tr>
+
         {result.data && (
           <>
             <tr>
-              <td>params</td>
+              <th>Parameters</th>
               <td>
-                {Object.entries(result.data.parameters).map(([k, v]) => (
-                  <div key={k}>
-                    {k}: {v}
-                  </div>
-                ))}
+                <ul className="mb-0 ps-3">
+                  {Object.entries(result.data.parameters).map(([k, v]) => (
+                    <li key={k}>
+                      <strong>{k}</strong>: {formatNumber(v, precision)}
+                    </li>
+                  ))}
+                </ul>
               </td>
             </tr>
             <tr>
-              <td>function</td>
-              <td>{result.data.f_expr}</td>
-            </tr>
-            <tr>
-              <td>determination coefficient</td>
-              <td>{result.data.determination_coefficient}</td>
-            </tr>
-            <tr>
-              <td>epsilons</td>
+              <th>Function</th>
               <td>
-                {result.data.epsilons.map((e) => (
-                  <div key={e}>{e}</div>
-                ))}
+                <BlockMath math={result.data.f_expr} />
               </td>
             </tr>
             <tr>
-              <td>deviation measure</td>
-              <td>{result.data.deviation_measure}</td>
+              <th>Determination Coefficient (R²)</th>
+              <td>
+                {formatNumber(result.data.determination_coefficient, precision)}
+              </td>
             </tr>
             <tr>
-              <td>MSE</td>
-              <td>{result.data.mse}</td>
+              <th>Epsilons</th>
+              <td>
+                <ul className="mb-0 ps-3">
+                  {result.data.epsilons.map((e, idx) => (
+                    <li key={idx}>{formatNumber(e, precision)}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>Deviation Measure</th>
+              <td>{formatNumber(result.data.deviation_measure, precision)}</td>
+            </tr>
+            <tr>
+              <th>MSE</th>
+              <td>{formatNumber(result.data.mse, precision)}</td>
             </tr>
             {result.data.pearson_correlation_coefficient && (
               <tr>
-                <td>pearson correlation coefficient</td>
-                <td>{result.data.pearson_correlation_coefficient}</td>
+                <th>Pearson Correlation Coefficient</th>
+                <td>
+                  {formatNumber(
+                    result.data.pearson_correlation_coefficient,
+                    precision,
+                  )}
+                </td>
               </tr>
             )}
           </>
         )}
+
         {result.message && (
           <tr>
-            <td>message</td>
+            <th>Message</th>
             <td>{result.message}</td>
           </tr>
         )}
