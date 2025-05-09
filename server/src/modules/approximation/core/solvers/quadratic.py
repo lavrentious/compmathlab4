@@ -1,3 +1,4 @@
+from decimal import Decimal
 import numpy as np
 from config import FORMAT_STR, PRECISION
 from modules.approximation.core.solvers.solver import BaseSolver
@@ -33,7 +34,7 @@ class QuadraticSolver(BaseSolver):
         print(f"{A=} {B=}")
         solution = np.linalg.solve(A, B)
         solution = np.round(solution, decimals=PRECISION)
-        [a0, a1, a2] = solution
+        [a0, a1, a2] = map(lambda x: Decimal(x), solution.tolist())
 
         parameters = {
             "a0": a0,
