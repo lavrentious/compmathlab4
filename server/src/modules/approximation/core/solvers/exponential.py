@@ -34,7 +34,7 @@ class ExponentialSolver(BaseSolver):
 
         # f(x) = a * e^(bx)
         f = lambda x: a * Decimal(e) ** (b * x)
-        f_expr = f"{a} * {e} ^ ({b} * x)"
+        f_expr = f"{FORMAT_STR.format(a)} * {FORMAT_STR.format(e)} ^ ({FORMAT_STR.format(b)} * x)"
 
         return ApproximationResult(
             f=f,

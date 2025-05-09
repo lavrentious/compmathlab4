@@ -30,7 +30,7 @@ class LinearSolver(BaseSolver):
         b = d2 / d
 
         f = lambda x: a * x + b
-        f_expr = f"{a} * x + {b}"
+        f_expr = f"{FORMAT_STR.format(a)} * x + {FORMAT_STR.format(b)}"
 
         return ApproximationResult(
             f=f,

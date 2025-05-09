@@ -32,7 +32,7 @@ class LogarithmicSolver(BaseSolver):
 
         # f(x) = a + b * ln(x)
         f = lambda x: a + b * x.ln()
-        f_expr = f"{a} + {b} * ln(x)"
+        f_expr = f"{FORMAT_STR.format(a)} + {FORMAT_STR.format(b)} * ln(x)"
 
         return ApproximationResult(
             f=f,

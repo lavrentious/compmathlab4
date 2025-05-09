@@ -43,7 +43,7 @@ class QuadraticSolver(BaseSolver):
         }
 
         f = lambda x: a2 * x**2 + a1 * x + a0
-        f_expr = f"{parameters['a2']}*x^2 + {parameters['a1']}*x + {parameters['a0']}"
+        f_expr = f"{FORMAT_STR.format(a2)}*x^2 + {FORMAT_STR.format(a1)}*x + {FORMAT_STR.format(a0)}"
 
         return ApproximationResult(
             f=f,

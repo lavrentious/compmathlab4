@@ -1,12 +1,17 @@
 from decimal import Decimal
 from typing import List, Union, Dict
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from config import FORMAT_STR, PRECISION
 from modules.approximation.core.types import ApproximationMethod, ApproximationResult
 
 
-class ApproximationRequest(BaseModel):
+class CustomBaseModel(BaseModel):
+    model_config = ConfigDict(json_encoders={Decimal: lambda v: FORMAT_STR.format(v)})
+
+
+class ApproximationRequest(CustomBaseModel):
     xs: List[Decimal] = Field(min_length=8, max_length=12)
     ys: List[Decimal] = Field(min_length=8, max_length=12)
     method: ApproximationMethod
@@ -28,14 +33,14 @@ class ApproximationRequest(BaseModel):
         return self
 
 
-class ApproximationData(BaseModel):
+class ApproximationData(CustomBaseModel):
     f_expr: str
     parameters: Dict[str, Decimal]
     determination_coefficient: Decimal
     pearson_correlation_coefficient: Decimal | None = None  # applicable for linear only
 
 
-class ApproximationResponse(BaseModel):
+class ApproximationResponse(CustomBaseModel):
     xs: List[str] = Field(min_length=8, max_length=12)
     ys: List[str] = Field(min_length=8, max_length=12)
     method: ApproximationMethod
