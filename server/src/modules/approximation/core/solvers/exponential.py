@@ -1,5 +1,5 @@
 from decimal import Decimal
-import decimal
+from math import e
 
 from config import FORMAT_STR
 from modules.approximation.core.solvers.linear import LinearSolver
@@ -9,7 +9,6 @@ from modules.approximation.core.types import (
     ApproximationResult,
     ApproximationValidation,
 )
-from math import e
 
 
 class ExponentialSolver(BaseSolver):

@@ -19,6 +19,9 @@ export type ApproximationData = {
   parameters: Record<string, string>; // string: float as string
   determination_coefficient: string;
   pearson_correlation_coefficient: string | null;
+  epsilons: string[];
+  deviation_measure: string;
+  mse: string;
 };
 
 export type ApproximationResponse = {

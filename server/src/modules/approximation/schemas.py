@@ -1,10 +1,10 @@
 from decimal import Decimal
-from typing import List, Union, Dict
+from typing import Dict, List, Union
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from config import FORMAT_STR, PRECISION
-from modules.approximation.core.types import ApproximationMethod, ApproximationResult
+from config import FORMAT_STR
+from modules.approximation.core.types import ApproximationMethod
 
 
 class CustomBaseModel(BaseModel):
@@ -37,6 +37,9 @@ class ApproximationData(CustomBaseModel):
     f_expr: str
     parameters: Dict[str, Decimal]
     determination_coefficient: Decimal
+    epsilons: List[Decimal]
+    deviation_measure: Decimal
+    mse: Decimal
     pearson_correlation_coefficient: Decimal | None = None  # applicable for linear only
 
 

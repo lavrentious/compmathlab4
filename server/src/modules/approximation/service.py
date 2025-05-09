@@ -8,7 +8,10 @@ from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import ApproximationMethod
 from modules.approximation.core.utils import (
     compute_determination_coefficient,
+    compute_deviation_measure,
+    compute_mse,
     compute_pearson_correlation_coefficient,
+    get_epsilons,
 )
 from modules.approximation.schemas import (
     ApproximationData,
@@ -48,7 +51,10 @@ class ApproximationService:
                 f_expr=res.f_expr,
                 parameters=res.parameters,
                 determination_coefficient=r,
+                epsilons=get_epsilons(data.xs, data.ys, res.f),
+                deviation_measure=compute_deviation_measure(data.xs, data.ys, res.f),
                 pearson_correlation_coefficient=pearson_coefficient,
+                mse=compute_mse(data.xs, data.ys, res.f),
             )
 
         return ApproximationResponse(

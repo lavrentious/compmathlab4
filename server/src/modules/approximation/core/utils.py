@@ -22,3 +22,21 @@ def compute_pearson_correlation_coefficient(
         sum((y - y_avg) ** 2 for y in ys)
     )
     return Decimal(s1 / s2.sqrt())
+
+
+def get_epsilons(
+    xs: List[Decimal], ys: List[Decimal], f: Callable[[Decimal], Decimal]
+) -> List[Decimal]:
+    return [Decimal(abs(y - f(x))) for x, y in zip(xs, ys)]
+
+
+def compute_deviation_measure(
+    xs: List[Decimal], ys: List[Decimal], f: Callable[[Decimal], Decimal]
+) -> Decimal:
+    return Decimal(sum(e**2 for e in get_epsilons(xs, ys, f)))
+
+
+def compute_mse(
+    xs: List[Decimal], ys: List[Decimal], f: Callable[[Decimal], Decimal]
+) -> Decimal:
+    return Decimal(compute_deviation_measure(xs, ys, f) / len(xs)).sqrt()

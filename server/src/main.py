@@ -1,4 +1,5 @@
 import decimal
+
 from config import PRECISION
 
 decimal.setcontext(decimal.Context(prec=PRECISION))

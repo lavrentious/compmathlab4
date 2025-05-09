@@ -44,6 +44,22 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({ result }) => {
               <td>determination coefficient</td>
               <td>{result.data.determination_coefficient}</td>
             </tr>
+            <tr>
+              <td>epsilons</td>
+              <td>
+                {result.data.epsilons.map((e) => (
+                  <div key={e}>{e}</div>
+                ))}
+              </td>
+            </tr>
+            <tr>
+              <td>deviation measure</td>
+              <td>{result.data.deviation_measure}</td>
+            </tr>
+            <tr>
+              <td>MSE</td>
+              <td>{result.data.mse}</td>
+            </tr>
             {result.data.pearson_correlation_coefficient && (
               <tr>
                 <td>pearson correlation coefficient</td>
@@ -52,16 +68,12 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({ result }) => {
             )}
           </>
         )}
-        <tr>
-          <td>message</td>
-          <td>
-            {result.message ? (
-              result.message
-            ) : (
-              <span className="text-muted fst-italic">n/a</span>
-            )}
-          </td>
-        </tr>
+        {result.message && (
+          <tr>
+            <td>message</td>
+            <td>{result.message}</td>
+          </tr>
+        )}
       </tbody>
     </Table>
   );
