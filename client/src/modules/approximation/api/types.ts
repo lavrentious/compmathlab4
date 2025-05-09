@@ -4,6 +4,7 @@ export enum ApproximationMethod {
   LINEAR = "LINEAR",
   QUADRATIC = "QUADRATIC",
   POWER = "POWER",
+  EXPONENTIAL = "EXPONENTIAL",
 }
 
 export type ApproximationRequest = {

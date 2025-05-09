@@ -8,6 +8,7 @@ class ApproximationMethod(Enum):
     LINEAR = "LINEAR"
     QUADRATIC = "QUADRATIC"
     POWER = "POWER"
+    EXPONENTIAL = "EXPONENTIAL"
 
 
 @dataclass

@@ -1,4 +1,5 @@
 from config import FORMAT_STR
+from modules.approximation.core.solvers.exponential import ExponentialSolver
 from modules.approximation.core.solvers.linear import LinearSolver
 from modules.approximation.core.solvers.power import PowerSolver
 from modules.approximation.core.solvers.quadratic import QuadraticSolver
@@ -17,6 +18,8 @@ class ApproximationService:
             solver = QuadraticSolver(data.xs, data.ys)
         elif data.method == ApproximationMethod.POWER:
             solver = PowerSolver(data.xs, data.ys)
+        elif data.method == ApproximationMethod.EXPONENTIAL:
+            solver = ExponentialSolver(data.xs, data.ys)
 
         if not solver:
             raise Exception("Internal Server Error")
