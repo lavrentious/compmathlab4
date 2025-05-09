@@ -1,16 +1,17 @@
 import Decimal from "decimal.js";
-import { Point } from "./types";
+import { Point } from "../types";
 
 export function fExprToFunction(
   fExpr: string,
 ): (x: Decimal.Value) => Decimal.Value {
   // FIXME
-  fExpr = fExpr.replace(/\^/g, "**");
+  fExpr = fExpr.replace(/\^/g, "**").replace(/ln\(/g, "Math.log(");
   return (_x: Decimal.Value) => {
     const x = new Decimal(_x);
     return new Function("x", `return ${fExpr}`)(x);
   };
 }
+
 export function generatePoints(
   fn: (x: Decimal.Value) => Decimal.Value,
   points: Point[],
