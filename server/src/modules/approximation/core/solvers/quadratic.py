@@ -2,7 +2,7 @@ from decimal import Decimal
 
 import numpy as np
 
-from config import FORMAT_STR, PRECISION
+from config import PRECISION
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
     ApproximationMethod,
@@ -45,7 +45,7 @@ class QuadraticSolver(BaseSolver):
         }
 
         f = lambda x: a2 * x**2 + a1 * x + a0
-        f_expr = f"{FORMAT_STR.format(a2)}*x^2 + {FORMAT_STR.format(a1)}*x + {FORMAT_STR.format(a0)}"
+        f_expr = f"a2*x^2 + a1*x + a0"
 
         return ApproximationResult(
             f=f,

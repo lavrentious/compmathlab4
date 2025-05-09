@@ -5,7 +5,10 @@ export function fExprToFunction(
   fExpr: string,
 ): (x: Decimal.Value) => Decimal.Value {
   // FIXME
-  fExpr = fExpr.replace(/\^/g, "**").replace(/ln\(/g, "Math.log(");
+  fExpr = fExpr
+    .replace(/\^/g, "**")
+    .replace(/ln\(/g, "Math.log(")
+    .replace(/e/g, "Math.E");
   return (_x: Decimal.Value) => {
     const x = new Decimal(_x);
     return new Function("x", `return ${fExpr}`)(x);
@@ -37,4 +40,24 @@ export function pointsToXsYs(points: Point[]): { xs: string[]; ys: string[] } {
 
 export function isStrictFloat(str: string): boolean {
   return /^[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?$/.test(str.trim());
+}
+
+export function hydrateFExpr(
+  fExpr: string,
+  parameters: Record<string, string>,
+  precision?: number,
+): string {
+  Object.entries(parameters).forEach(([key, value]) => {
+    fExpr = fExpr.replace(key, precision ? (+value).toFixed(precision) : value);
+  });
+  console.log("HYDRATED", fExpr);
+  return fExpr;
+}
+
+export function fExprToKatex(fExpr: string): string {
+  return fExpr
+    .replace(/\*/g, "\\cdot ")
+    .replace(/\+\s*-/g, "-")
+    .replace(/\(/g, "{")
+    .replace(/\)/g, "}");
 }

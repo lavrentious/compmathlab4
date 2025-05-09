@@ -1,7 +1,12 @@
 import React, { useMemo } from "react";
 import Plot from "react-plotly.js";
 import { ApproximationResponse } from "../api/types";
-import { fExprToFunction, generatePoints, pointsToXsYs } from "../utils/utils";
+import {
+  fExprToFunction,
+  generatePoints,
+  hydrateFExpr,
+  pointsToXsYs,
+} from "../utils/utils";
 
 interface VisualizationPlotProps {
   result: ApproximationResponse;
@@ -10,7 +15,9 @@ interface VisualizationPlotProps {
 const VisualizationPlot: React.FC<VisualizationPlotProps> = ({ result }) => {
   const fn = useMemo(() => {
     if (!result.data) return null;
-    return fExprToFunction(result.data.f_expr);
+    return fExprToFunction(
+      hydrateFExpr(result.data.f_expr, result.data.parameters),
+    );
   }, [result]);
   const { xs, ys } = useMemo(() => {
     if (!fn || !result.points) return { xs: [], ys: [] };

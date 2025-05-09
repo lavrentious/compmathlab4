@@ -1,4 +1,3 @@
-from config import FORMAT_STR
 from modules.approximation.core.solvers.linear import LinearSolver
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
@@ -30,7 +29,7 @@ class LogarithmicSolver(BaseSolver):
 
         # f(x) = a + b * ln(x)
         f = lambda x: a + b * x.ln()
-        f_expr = f"{FORMAT_STR.format(a)} + {FORMAT_STR.format(b)} * ln(x)"
+        f_expr = f"a + b*ln(x)"
 
         return ApproximationResult(
             f=f,

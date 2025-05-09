@@ -1,7 +1,6 @@
 from decimal import Decimal
 from math import e
 
-from config import FORMAT_STR
 from modules.approximation.core.solvers.linear import LinearSolver
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
@@ -33,7 +32,7 @@ class ExponentialSolver(BaseSolver):
 
         # f(x) = a * e^(bx)
         f = lambda x: a * Decimal(e) ** (b * x)
-        f_expr = f"{FORMAT_STR.format(a)} * {FORMAT_STR.format(e)} ^ ({FORMAT_STR.format(b)} * x)"
+        f_expr = f"a * e^(b*x)"
 
         return ApproximationResult(
             f=f,

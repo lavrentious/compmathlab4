@@ -3,6 +3,7 @@ import React from "react";
 import { Badge, Table } from "react-bootstrap";
 import { BlockMath } from "react-katex";
 import { ApproximationResponse } from "../api/types";
+import { fExprToKatex, hydrateFExpr } from "../utils/utils";
 
 interface VisualizationTableProps {
   result: ApproximationResponse;
@@ -53,7 +54,11 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({
             <tr>
               <th>Function</th>
               <td>
-                <BlockMath math={result.data.f_expr} />
+                <BlockMath
+                  math={fExprToKatex(
+                    hydrateFExpr(result.data.f_expr, result.data.parameters, 8),
+                  )}
+                />
               </td>
             </tr>
             <tr>

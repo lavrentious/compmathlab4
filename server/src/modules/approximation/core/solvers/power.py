@@ -1,4 +1,3 @@
-from config import FORMAT_STR
 from modules.approximation.core.solvers.linear import LinearSolver
 from modules.approximation.core.solvers.solver import BaseSolver
 from modules.approximation.core.types import (
@@ -31,7 +30,7 @@ class PowerSolver(BaseSolver):
         b = linear_approximation.parameters["a"]
 
         f = lambda x: a * x**b
-        f_expr = f"{FORMAT_STR.format(a)} * x ^ {FORMAT_STR.format(b)}"
+        f_expr = f"a*x^(b)"
 
         return ApproximationResult(
             f=f,

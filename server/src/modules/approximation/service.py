@@ -1,5 +1,6 @@
 from decimal import Decimal
 from typing import Dict, List, Type
+
 from config import FORMAT_STR
 from modules.approximation.core.solvers.exponential import ExponentialSolver
 from modules.approximation.core.solvers.linear import LinearSolver
