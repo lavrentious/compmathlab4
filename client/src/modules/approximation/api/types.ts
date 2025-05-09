@@ -13,6 +13,10 @@ export type ApproximationRequest = {
   xs: string[];
   ys: string[];
 };
+export type BestApproximationRequest = {
+  xs: string[];
+  ys: string[];
+};
 
 export type ApproximationData = {
   f_expr: string;
@@ -30,4 +34,8 @@ export type ApproximationResponse = {
   success: boolean;
   message: string | null;
   data: ApproximationData | null;
+};
+
+export type BestApproximationResponse = {
+  deviation_measures: Record<ApproximationMethod, string>;
 };

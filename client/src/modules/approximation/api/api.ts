@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ApproximationRequest, ApproximationResponse } from "./types";
+import {
+  ApproximationRequest,
+  ApproximationResponse,
+  BestApproximationRequest,
+  BestApproximationResponse,
+} from "./types";
 import { xsYsToPoints } from "./utils";
 
 export const approximationApi = createApi({
@@ -32,7 +37,20 @@ export const approximationApi = createApi({
         } as ApproximationResponse;
       },
     }),
+    getBestMethod: build.mutation<
+      BestApproximationResponse,
+      BestApproximationRequest
+    >({
+      query: (data) => {
+        return {
+          url: "/approximation/best",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useApproximateMutation } = approximationApi;
+export const { useApproximateMutation, useGetBestMethodMutation } =
+  approximationApi;

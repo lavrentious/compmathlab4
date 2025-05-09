@@ -1,3 +1,5 @@
+from decimal import Decimal
+from typing import Dict, List, Type
 from config import FORMAT_STR
 from modules.approximation.core.solvers.exponential import ExponentialSolver
 from modules.approximation.core.solvers.linear import LinearSolver
@@ -17,6 +19,8 @@ from modules.approximation.schemas import (
     ApproximationData,
     ApproximationRequest,
     ApproximationResponse,
+    BestApproximationRequest,
+    BestApproximationResponse,
 )
 
 
@@ -65,3 +69,27 @@ class ApproximationService:
             data=solution_data,
             message=validation_result.message,
         )
+
+    async def get_best(
+        self, data: BestApproximationRequest
+    ) -> BestApproximationResponse:
+        deviation_measures: Dict[ApproximationMethod, Decimal] = {}
+
+        solvers: List[Type[BaseSolver]] = [
+            LinearSolver,
+            QuadraticSolver,
+            PowerSolver,
+            ExponentialSolver,
+            LogarithmicSolver,
+        ]
+        for Solver in solvers:
+            solver = Solver(data.xs, data.ys)
+            validation_result = solver.validate()
+            if not validation_result.success:
+                break
+            solution = solver.solve()
+            deviation_measures[solver.approximation_type] = compute_deviation_measure(
+                data.xs, data.ys, solution.f
+            )
+
+        return BestApproximationResponse(deviation_measures=deviation_measures)

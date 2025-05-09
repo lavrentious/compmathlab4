@@ -50,3 +50,28 @@ class ApproximationResponse(CustomBaseModel):
     success: bool
     message: str | None = None
     data: ApproximationData | None = None
+
+
+class BestApproximationRequest(CustomBaseModel):
+    xs: List[Decimal] = Field(min_length=8, max_length=12)
+    ys: List[Decimal] = Field(min_length=8, max_length=12)
+
+    @field_validator("xs", "ys", mode="before")
+    @classmethod
+    def coerce_to_decimal(cls, values: List[Union[str, float]]) -> List[Decimal]:
+        try:
+            return [Decimal(v) for v in values]
+        except Exception:
+            raise ValueError(
+                "All coordinates must be floats or strings representing floats"
+            )
+
+    @model_validator(mode="after")
+    def length_match(self) -> "BestApproximationRequest":
+        if len(self.xs) != len(self.ys):
+            raise ValueError("Lengths of xs and ys must match")
+        return self
+
+
+class BestApproximationResponse(CustomBaseModel):
+    deviation_measures: Dict[ApproximationMethod, Decimal]
