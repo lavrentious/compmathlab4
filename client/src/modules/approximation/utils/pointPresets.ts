@@ -26,6 +26,18 @@ export const pointPresets: Record<string, Point[]> = {
     { x: "9", y: "50.7" },
     { x: "10", y: "61.8" },
   ],
+  [ApproximationMethod.CUBIC]: [
+    { x: "0", y: "1" },
+    { x: "1", y: "2.5" },
+    { x: "2", y: "5" },
+    { x: "3", y: "10.5" },
+    { x: "4", y: "21" },
+    { x: "5", y: "38.5" },
+    { x: "6", y: "65" },
+    { x: "7", y: "102.5" },
+    { x: "8", y: "153" },
+    { x: "9", y: "218.5" },
+  ],
   [ApproximationMethod.POWER]: [
     { x: "1", y: "2" },
     { x: "2", y: "5.66" },

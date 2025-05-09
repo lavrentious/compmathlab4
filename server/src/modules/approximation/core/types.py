@@ -7,6 +7,7 @@ from typing import Callable, Dict
 class ApproximationMethod(Enum):
     LINEAR = "LINEAR"
     QUADRATIC = "QUADRATIC"
+    CUBIC = "CUBIC"
     POWER = "POWER"
     EXPONENTIAL = "EXPONENTIAL"
     LOGARITHMIC = "LOGARITHMIC"

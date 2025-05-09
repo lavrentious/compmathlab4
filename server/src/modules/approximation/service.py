@@ -2,6 +2,7 @@ from decimal import Decimal
 from typing import Dict, List, Type
 
 from config import FORMAT_STR
+from modules.approximation.core.solvers.cubic import CubicSolver
 from modules.approximation.core.solvers.exponential import ExponentialSolver
 from modules.approximation.core.solvers.linear import LinearSolver
 from modules.approximation.core.solvers.logarithmic import LogarithmicSolver
@@ -33,6 +34,8 @@ class ApproximationService:
             solver = LinearSolver(data.xs, data.ys)
         elif data.method == ApproximationMethod.QUADRATIC:
             solver = QuadraticSolver(data.xs, data.ys)
+        elif data.method == ApproximationMethod.CUBIC:
+            solver = CubicSolver(data.xs, data.ys)
         elif data.method == ApproximationMethod.POWER:
             solver = PowerSolver(data.xs, data.ys)
         elif data.method == ApproximationMethod.EXPONENTIAL:
@@ -79,6 +82,7 @@ class ApproximationService:
         solvers: List[Type[BaseSolver]] = [
             LinearSolver,
             QuadraticSolver,
+            CubicSolver,
             PowerSolver,
             ExponentialSolver,
             LogarithmicSolver,

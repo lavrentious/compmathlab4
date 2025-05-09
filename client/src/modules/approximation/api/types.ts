@@ -3,6 +3,7 @@ import { Point } from "../types";
 export enum ApproximationMethod {
   LINEAR = "LINEAR",
   QUADRATIC = "QUADRATIC",
+  CUBIC = "CUBIC",
   POWER = "POWER",
   EXPONENTIAL = "EXPONENTIAL",
   LOGARITHMIC = "LOGARITHMIC",
