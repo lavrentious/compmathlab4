@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import ApproximationParamsBlock from "../components/ApproximationParamsBlock";
-import ApproximationVisualizationBlock from "../components/ApproximationVisualizationBlock";
+import ApproximationVisualizationBlock from "../components/VisualizationBlock";
 
 import ImportModal from "../components/ImportModal";
 import PointsFormBlock from "../components/PointsFormBlock";
