@@ -11,6 +11,7 @@ from modules.approximation.core.types import (
 )
 from math import e
 
+
 class ExponentialSolver(BaseSolver):
     approximation_type = ApproximationMethod.EXPONENTIAL
 
@@ -28,8 +29,8 @@ class ExponentialSolver(BaseSolver):
 
         linear_approximation = LinearSolver(self.xs, log_ys).solve()
 
-        a = Decimal(linear_approximation.parameters["b"]).exp()
-        b = Decimal(linear_approximation.parameters["a"])
+        a = linear_approximation.parameters["b"].exp()
+        b = linear_approximation.parameters["a"]
 
         # f(x) = a * e^(bx)
         f_expr = f"{FORMAT_STR.format(a)} * {FORMAT_STR.format(e)} ^ ({FORMAT_STR.format(b)} * x)"

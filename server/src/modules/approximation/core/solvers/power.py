@@ -29,8 +29,8 @@ class PowerSolver(BaseSolver):
 
         linear_approximation = LinearSolver(log_xs, log_ys).solve()
 
-        a = Decimal(linear_approximation.parameters["b"]).exp()
-        b = Decimal(linear_approximation.parameters["a"])
+        a = linear_approximation.parameters["b"].exp()
+        b = linear_approximation.parameters["a"]
 
         f_expr = f"{FORMAT_STR.format(a)} * x ^ {FORMAT_STR.format(b)}"
 

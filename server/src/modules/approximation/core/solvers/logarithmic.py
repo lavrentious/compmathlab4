@@ -27,8 +27,8 @@ class LogarithmicSolver(BaseSolver):
 
         linear_approximation = LinearSolver(log_xs, self.ys).solve()
 
-        a = Decimal(linear_approximation.parameters["b"])
-        b = Decimal(linear_approximation.parameters["a"])
+        a = linear_approximation.parameters["b"]
+        b = linear_approximation.parameters["a"]
 
         # f(x) = a + b * ln(x)
         f_expr = f"{FORMAT_STR.format(a)} + {FORMAT_STR.format(b)} * ln(x)"
