@@ -27,7 +27,7 @@ class LogarithmicSolver(BaseSolver):
         a = linear_approximation.parameters["a"]
         b = linear_approximation.parameters["b"]
 
-        # f(x) = a + b * ln(x)
+        # f(x) = a * ln(x) + b
         f = lambda x: a + b * x.ln()
         f_expr = f"a*ln(x) + b"
 
