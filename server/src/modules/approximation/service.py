@@ -77,7 +77,7 @@ class ApproximationService:
     async def get_best(
         self, data: BestApproximationRequest
     ) -> BestApproximationResponse:
-        deviation_measures: Dict[ApproximationMethod, Decimal] = {}
+        mses: Dict[ApproximationMethod, Decimal] = {}
 
         solvers: List[Type[BaseSolver]] = [
             LinearSolver,
@@ -93,8 +93,6 @@ class ApproximationService:
             if not validation_result.success:
                 break
             solution = solver.solve()
-            deviation_measures[solver.approximation_type] = compute_deviation_measure(
-                data.xs, data.ys, solution.f
-            )
+            mses[solver.approximation_type] = compute_mse(data.xs, data.ys, solution.f)
 
-        return BestApproximationResponse(deviation_measures=deviation_measures)
+        return BestApproximationResponse(mses=mses)

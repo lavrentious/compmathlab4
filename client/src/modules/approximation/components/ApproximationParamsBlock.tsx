@@ -27,11 +27,11 @@ const ApproximationParamsBlock = () => {
       ys: points.map((point) => point.y),
     })
       .unwrap()
-      .then(({ deviation_measures }) => {
+      .then(({ mses }) => {
         let minR: number = Infinity;
         let bestMethod: ApproximationMethod | null = null;
         for (const method in ApproximationMethod) {
-          const r = +deviation_measures[method as ApproximationMethod];
+          const r = +mses[method as ApproximationMethod];
           if (r < minR) {
             minR = r;
             bestMethod = method as ApproximationMethod;

@@ -74,4 +74,4 @@ class BestApproximationRequest(CustomBaseModel):
 
 
 class BestApproximationResponse(CustomBaseModel):
-    deviation_measures: Dict[ApproximationMethod, Decimal]
+    mses: Dict[ApproximationMethod, Decimal]

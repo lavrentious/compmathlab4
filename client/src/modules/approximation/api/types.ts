@@ -38,5 +38,5 @@ export type ApproximationResponse = {
 };
 
 export type BestApproximationResponse = {
-  deviation_measures: Record<ApproximationMethod, string>;
+  mses: Record<ApproximationMethod, string>;
 };
