@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { Card, Form, InputGroup } from "react-bootstrap";
 import toast from "react-hot-toast";
+import { FaRobot } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import LoadingButton from "src/modules/common/components/LoadingButton";
 import { RootState, useAppDispatch } from "src/store";
@@ -72,7 +73,7 @@ const ApproximationParamsBlock = () => {
                 isLoading={isLoading}
                 variant="secondary"
               >
-                auto
+                <FaRobot /> Auto
               </LoadingButton>
             </InputGroup>
           </Form.Group>

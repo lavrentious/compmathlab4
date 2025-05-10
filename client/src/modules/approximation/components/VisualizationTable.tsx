@@ -1,6 +1,8 @@
 import "katex/dist/katex.min.css";
-import React from "react";
-import { Badge, Table } from "react-bootstrap";
+import React, { useMemo } from "react";
+import { Badge, Button, Table } from "react-bootstrap";
+import toast from "react-hot-toast";
+import { BiInfoCircle } from "react-icons/bi";
 import { BlockMath } from "react-katex";
 import { ApproximationResponse } from "../api/types";
 import { fExprToKatex, hydrateFExpr } from "../utils/utils";
@@ -19,6 +21,17 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({
   result,
   precision = 16,
 }) => {
+  const rQuality: { color: string; precision: string } | null = useMemo(() => {
+    if (!result.data?.determination_coefficient) return null;
+    if (+result.data?.determination_coefficient >= 0.95)
+      return { color: "green", precision: "high" };
+    if (+result.data?.determination_coefficient >= 0.75)
+      return { color: "gold", precision: "medium" };
+    if (+result.data?.determination_coefficient >= 0.5)
+      return { color: "indianred", precision: "low" };
+    return { color: "crimson", precision: "insufficient" };
+  }, [result]);
+
   return (
     <Table bordered hover responsive className="mb-0">
       <tbody>
@@ -63,8 +76,18 @@ const VisualizationTable: React.FC<VisualizationTableProps> = ({
             </tr>
             <tr>
               <th>Determination Coefficient (R²)</th>
-              <td>
+              <td
+                className="d-flex justify-content-between"
+                style={{ color: rQuality?.color || undefined }}
+              >
                 {formatNumber(result.data.determination_coefficient, precision)}
+                <Button variant="outline-info" size="sm">
+                  <BiInfoCircle
+                    onClick={() =>
+                      toast(`R quality: ${rQuality?.precision || "n/a"}`)
+                    }
+                  />
+                </Button>
               </td>
             </tr>
             <tr>

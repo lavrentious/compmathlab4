@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { Button, Card } from "react-bootstrap";
+import { BiExport } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
 import VisualizationPlot from "./VisualizationPlot";
@@ -35,7 +36,7 @@ const ApproximationVisualizationBlock = () => {
       {result && (
         <Card.Footer>
           <Button onClick={downloadJson} variant="secondary">
-            export to json
+            <BiExport /> Export to json
           </Button>
         </Card.Footer>
       )}

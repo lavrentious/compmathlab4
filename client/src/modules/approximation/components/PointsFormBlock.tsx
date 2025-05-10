@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
+import { BiImport } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "src/store";
 import {
@@ -106,7 +107,7 @@ const PointsFormBlock = () => {
           variant="secondary"
           onClick={() => dispatch(setImportModalShown(true))}
         >
-          import
+          <BiImport /> Import
         </Button>
       </Card.Footer>
     </Card>
