@@ -24,12 +24,12 @@ class LogarithmicSolver(BaseSolver):
 
         linear_approximation = LinearSolver(log_xs, self.ys).solve()
 
-        a = linear_approximation.parameters["b"]
-        b = linear_approximation.parameters["a"]
+        a = linear_approximation.parameters["a"]
+        b = linear_approximation.parameters["b"]
 
         # f(x) = a + b * ln(x)
         f = lambda x: a + b * x.ln()
-        f_expr = f"a + b*ln(x)"
+        f_expr = f"a*ln(x) + b"
 
         return ApproximationResult(
             f=f,

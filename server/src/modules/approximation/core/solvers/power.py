@@ -29,6 +29,7 @@ class PowerSolver(BaseSolver):
         a = linear_approximation.parameters["b"].exp()
         b = linear_approximation.parameters["a"]
 
+        # f(x) = a * x^b
         f = lambda x: a * x**b
         f_expr = f"a*x^(b)"
 
