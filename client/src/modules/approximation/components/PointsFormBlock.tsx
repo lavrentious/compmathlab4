@@ -95,7 +95,11 @@ const PointsFormBlock = () => {
         )}
       </Card.Body>
       <Card.Footer className="d-flex  justify-content-between">
-        <Button onClick={addPoint} variant="success">
+        <Button
+          onClick={addPoint}
+          variant="success"
+          disabled={points.length >= 12}
+        >
           +
         </Button>
         <Button
