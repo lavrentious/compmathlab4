@@ -32,6 +32,12 @@ class ApproximationRequest(CustomBaseModel):
             raise ValueError("Lengths of xs and ys must match")
         return self
 
+    @model_validator(mode="after")
+    def xs_unique(self) -> "ApproximationRequest":
+        if len(set(self.xs)) != len(self.xs):
+            raise ValueError("All xs must be unique")
+        return self
+
 
 class ApproximationData(CustomBaseModel):
     f_expr: str
@@ -70,6 +76,12 @@ class BestApproximationRequest(CustomBaseModel):
     def length_match(self) -> "BestApproximationRequest":
         if len(self.xs) != len(self.ys):
             raise ValueError("Lengths of xs and ys must match")
+        return self
+
+    @model_validator(mode="after")
+    def xs_unique(self) -> "BestApproximationRequest":
+        if len(set(self.xs)) != len(self.xs):
+            raise ValueError("All xs must be unique")
         return self
 
 

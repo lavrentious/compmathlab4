@@ -26,6 +26,10 @@ const SubmitApproximationButton = () => {
 
   const disabled = useMemo(() => {
     if (points.length < 8) return true;
+    const allXsAreUnique =
+      Array.from(new Set(points.map((point) => point.x))).length ===
+      points.length;
+    if (!allXsAreUnique) return true;
   }, [points]);
 
   return (
